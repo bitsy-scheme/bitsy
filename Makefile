@@ -15,22 +15,23 @@
 
 .POSIX:
 
+BIBTEX  = bibtex
 CTANGLE = ctangle
 CWEAVE  = cweave
+PDFTEX  = luatex
 
 LDLIBS = -lm
 
 .PHONY: all
-all: prog
+all: bin/bitsy
 
 .PHONY: doc
 doc: bitsy.pdf
 
-.PHONY: prog
-prog: bin/bitsy
-
 .PHONY: regen
-regen: bitsy.c bitsy.tex
+regen:
+	$(CTANGLE) bitsy
+	$(CWEAVE) bitsy
 
 .PHONY: clean
 clean:
@@ -43,16 +44,14 @@ bin/bitsy: bitsy.o
 
 .SUFFIXES:
 .SUFFIXES: .c .o .pdf .tex .w
-
 .w.c:
 	$(CTANGLE) $*
 .w.tex:
 	$(CWEAVE) $*
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
-
 .tex.pdf:
-	luatex -jobname=$* "\input eplain \input $*"
-#	bibtex $*
-#	luatex -jobname=$* "\input eplain \input $*"
-#	luatex -jobname=$* "\input eplain \input $*"
+	$(PDFTEX) -jobname=$* "\input eplain \input $*"
+#	$(BIBTEX) $*
+#	$(PDFTEX) -jobname=$* "\input eplain \input $*"
+#	$(PDFTEX) -jobname=$* "\input eplain \input $*"
