@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Bitsy Scheme
+Upstream-Contact: Masanori Ogino <mogino@acm.org>
+Source: https://github.com/bitsy-scheme/bitsy
+
+Files: bitsy.c
+Copyright: 2024 Masanori Ogino
+License: ISC
