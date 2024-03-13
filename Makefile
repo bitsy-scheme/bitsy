@@ -21,7 +21,7 @@ CWEAVE  = cweave
 LDLIBS = -lm
 
 .PHONY: all
-all: regen doc prog
+all: regen prog
 
 .PHONY: doc
 doc: bitsy.pdf
