@@ -13,7 +13,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-name: TeX Live Doc CI
+name: TeX Live Container
 on: [push, pull_request]
 jobs:
   doc:
@@ -24,3 +24,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Build documentation
         run: make doc
+  regen-check:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Check if the code in doc is in sync
+        run: make regen-check

@@ -33,10 +33,17 @@ regen:
 	$(CTANGLE) bitsy
 	$(CWEAVE) bitsy
 
+.PHONY: regen-check
+regen-check:
+	mv bitsy.c bitsy.c.orig
+	$(CTANGLE) bitsy
+	diff bitsy.c.orig bitsy.c
+	rm -f bitsy.c.orig
+
 .PHONY: clean
 clean:
 	rm -rf bin
-	rm -f *.aux *.bbl *.blg *.idx *.log *.o *.out *.pdf *.scn *.tex *.toc
+	rm -f *.aux *.bbl *.blg *.idx *.log *.o *.orig *.out *.pdf *.scn *.tex *.toc
 
 bin/bitsy: bitsy.o
 	mkdir -p bin
